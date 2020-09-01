@@ -111,56 +111,40 @@ bool LinkedList<T>::removeBack()
 {
 	Node<T>* lastNode = nullptr;
 	Node<T>* secondintoLast = nullptr;
-	bool isRemoved = false;
-
-	/** TODO
-		Fix this method
-	*/
-
-	return(isRemoved);
-}
-
-template <typename T>
-bool LinkedList<T>::removeFront()
-{
 	Node<T>* temp = nullptr;
 	bool isRemoved = false;
-
-	if(!isEmpty())
+	lastNode = m_front;
+	secondintoLast = m_front;
+	if (m_front == nullptr)
 	{
-		temp = m_front;
-		m_front = temp->getNext();
-		delete temp;
-		m_size--;
-		isRemoved = true;
+		return(false);
 	}
 
+	else if (m_front->getNext() == nullptr)
+	{
+		temp = m_front;
+		delete temp;
+		isRemoved = true;
+		m_size = m_size-1;
+		return (isRemoved);
+	}
+	else
+	{
+		while (lastNode->getNext() != nullptr)
+		{
+			lastNode = lastNode->getNext();
+			if (lastNode->getNext() !=nullptr)
+			{
+				secondintoLast = lastNode;
+			}
+		}
+		secondintoLast->setNext(temp);
+		delete lastNode;
+	}
+	m_size = m_size-1;
+	isRemoved = true;
 	return(isRemoved);
 }
-}
-
-template <typename T>
-void LinkedList<T>::addFront(T value)
-{
-	Node<T>* temp = m_front;
-	m_front = new Node<T>(value);
-	m_front->setNext( temp );
-	m_size++;
-}
-
-template <typename T>
-bool LinkedList<T>::removeBack()
-{
-	Node<T>* lastNode = nullptr;
-	Node<T>* secondintoLast = nullptr;
-	bool isRemoved = false;
-
-	/** TODO 
-		Fix this method
-	*/
-
-	return(isRemoved);
-}	
 
 template <typename T>
 bool LinkedList<T>::removeFront()
