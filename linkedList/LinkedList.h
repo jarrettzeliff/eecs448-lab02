@@ -1,6 +1,6 @@
 /**
 *	@file LinkedList.h
-*	@author 
+*	@author Jarrett
 *	@date 
 *	@brief A header file for templated LinkedList class
 */
