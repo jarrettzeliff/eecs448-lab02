@@ -1,6 +1,6 @@
 /**
-*	@author 
-*	@date 
+*	@author
+*	@date
 *	@file LinkedList.hpp
 *	@brief Implementation file for templated LinkedList class
 */
@@ -12,7 +12,7 @@ LinkedList<T>::LinkedList() : m_front(nullptr), m_size(0)
 }
 
 template <typename T>
-LinkedList<T>::~LinkedList() 
+LinkedList<T>::~LinkedList()
 {
 	while(!isEmpty())
 	{
@@ -29,6 +29,7 @@ bool LinkedList<T>::isEmpty() const
 template <typename T>
 int LinkedList<T>::size() const
 {
+
 	return(m_size);
 	return(0);
 }
@@ -36,14 +37,25 @@ int LinkedList<T>::size() const
 template <typename T>
 bool LinkedList<T>::search(T value) const
 {
+	if (m_front == nullptr)
+	{
+		return (false);
+	}
+
 	Node<T>* temp = m_front;
 	bool isFound = false;
 
-	/** TODO 
-		Fix this method
-	*/
-
+	while (temp != nullptr)
+	{
+		if (temp->getValue() == value)
+		{
+			isFound = true;
+			return (isFound);
+		}
+		temp = temp->getNext();
+	}
 	return(isFound);
+
 }
 
 template <typename T>
@@ -58,8 +70,8 @@ std::vector<T> LinkedList<T>::toVector() const
 		temp = temp->getNext();
 	}
 
-	return(vec);	
-	
+	return(vec);
+
 }
 
 template <typename T>
@@ -69,7 +81,7 @@ void LinkedList<T>::addBack(T value)
 
 	if(isEmpty())
 	{
-		m_front = new Node<T>(value);	
+		m_front = new Node<T>(value);
 	}
 	else
 	{
@@ -79,10 +91,52 @@ void LinkedList<T>::addBack(T value)
 			temp = temp->getNext();
 		}
 
-		temp->setNext( new Node<T>(value) );		
+		temp->setNext( new Node<T>(value) );
 	}
 
 	m_size++;
+}
+
+template <typename T>
+void LinkedList<T>::addFront(T value)
+{
+	Node<T>* temp = m_front;
+	m_front = new Node<T>(value);
+	m_front->setNext( temp );
+	m_size++;
+}
+
+template <typename T>
+bool LinkedList<T>::removeBack()
+{
+	Node<T>* lastNode = nullptr;
+	Node<T>* secondintoLast = nullptr;
+	bool isRemoved = false;
+
+	/** TODO
+		Fix this method
+	*/
+
+	return(isRemoved);
+}
+
+template <typename T>
+bool LinkedList<T>::removeFront()
+{
+	Node<T>* temp = nullptr;
+	bool isRemoved = false;
+
+	if(!isEmpty())
+	{
+		temp = m_front;
+		m_front = temp->getNext();
+		delete temp;
+		m_size--;
+		isRemoved = true;
+	}
+
+	return(isRemoved);
+}
 }
 
 template <typename T>
