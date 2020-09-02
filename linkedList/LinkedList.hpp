@@ -1,6 +1,6 @@
 /**
-*	@author
-*	@date
+*	@author Jarrett Zeliff
+*	@date 9/01/2020
 *	@file LinkedList.hpp
 *	@brief Implementation file for templated LinkedList class
 */
@@ -30,7 +30,7 @@ template <typename T>
 int LinkedList<T>::size() const
 {
 
-	return(m_size);
+	return(m_size); // just returns size
 	return(0);
 }
 
@@ -39,13 +39,13 @@ bool LinkedList<T>::search(T value) const
 {
 	if (m_front == nullptr)
 	{
-		return (false);
+		return (false); // wont return if list is empty
 	}
 
 	Node<T>* temp = m_front;
 	bool isFound = false;
 
-	while (temp != nullptr)
+	while (temp != nullptr) //checks throughout the entire list until the end
 	{
 		if (temp->getValue() == value)
 		{
@@ -117,7 +117,7 @@ bool LinkedList<T>::removeBack()
 	secondintoLast = m_front;
 	if (m_front == nullptr)
 	{
-		return(false);
+		return(false); // if its empty, return false
 	}
 
 	else if (m_front->getNext() == nullptr)
@@ -126,7 +126,7 @@ bool LinkedList<T>::removeBack()
 		delete temp;
 		isRemoved = true;
 		m_size = m_size-1;
-		return (isRemoved);
+		return (isRemoved); // if there is only one node, delete is and return false
 	}
 	else
 	{
@@ -135,11 +135,11 @@ bool LinkedList<T>::removeBack()
 			lastNode = lastNode->getNext();
 			if (lastNode->getNext() !=nullptr)
 			{
-				secondintoLast = lastNode;
+				secondintoLast = lastNode; 
 			}
 		}
-		secondintoLast->setNext(temp);
-		delete lastNode;
+		secondintoLast->setNext(temp); // makes second to last nodes next value nullptr
+		delete lastNode; // deletes the actual last node
 	}
 	m_size = m_size-1;
 	isRemoved = true;
